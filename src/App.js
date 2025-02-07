@@ -1,27 +1,21 @@
-// Write your code at relevant places in the code below:
-
 import React, { useState } from "react";
-import UserList from "./components/UserLists/UserList";
-import AddUser from "./components/User/AddUser";
+import UserLists from "./components/UserLists/UserLists";
+import AddUser from "./components/Users/AddUser";
 
 function App() {
-  // const [finalList, setList] = useState([]);
+  const [users, setUsers] = useState([]);
+  const onSubmitFormHandler = (uName, uAge) => {
+    setUsers((previousUsers) => {
+      return [...previousUsers, { username: uName, age: uAge, id: Math.random().toString()}];
+    })
+  }
 
-  // function onAddUserHandler (user) {
-  //   setList((prevUsers) => {
-  //     user.id = prevUsers.length + 1;
-  //     return [...prevUsers, user]
-  //   })
-  // }
   return (
     <div>
-      <section>
-        <AddUser/>
-        {/* <UserList >{finalList}</UserList> */}
-      </section>
+        <AddUser onSubmitForm={onSubmitFormHandler}/>
+        <UserLists users={users} />
     </div>
   );
 }
 
 export default App;
- 
